@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css" th:href="@{/css/reset.css}">
+</head>
+
+<body class="d-flex justify-content-center align-items-center h-100">
+<main class="container shadow-lg p-3 m-5 bg-body rounded">
+    <div class="modal-header">
+        <span></span>
+        <a href="/login" type="button" class="btn-close" aria-label="Close"></a>
+    </div>
+    <div class="row g-3 mb-1">
+        <div class="col">
+            <h4 class="text-info">Регистрация</h4>
+        </div>
+    </div>
+    <div class="row g-3 my-3">
+        <div class="col form-floating">
+            <input required type="text" class="form-control" id="first_name" name="first_name" placeholder="Имя">
+            <label for="first_name">Имя</label>
+        </div>
+        <div class="col form-floating">
+            <input required type="text" class="form-control" id="last_name" name="last_name" placeholder="Фамилия">
+            <label for="last_name">Фамилия</label>
+        </div>
+        <div class="col form-floating">
+            <input required type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Номер телефона">
+            <label for="phone_number">Номер телефона</label>
+        </div>
+    </div>
+    <div class="row g-3 my-3">
+        <div class="col form-floating">
+            <input required type="text" class="form-control" id="login" name="login" placeholder="Логин">
+            <label for="login">Логин</label>
+        </div>
+    </div>
+    <div class="row g-3 my-3">
+        <div class="col form-floating">
+            <input required type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+            <label for="password">Пароль</label>
+        </div>
+    </div>
+    <div class="row g-3 my-3">
+        <div class="col form-floating">
+            <input required type="password" class="form-control" id="password_repeat" name="password_repeat" placeholder="Повторите пароль">
+            <label for="password_repeat">Повторите пароль</label>
+        </div>
+    </div>
+
+    <div class="col form-floating d-flex flex-row-reverse">
+        <button type="button" th:attr="onclick=|registrate()|" class="btn btn-outline-success">Зарегестрироваться</button>
+    </div>
+    </div>
+</main>
+</body>
+
+
+
+<script src="/static/js/bootstrap.bundle.js" th:src="@{/js/bootstrap.bundle.js}"></script>
+<script src="/static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+
+<script src="/static/js/registration/registration.js" th:src="@{/js/registration/registration.js}"></script>
+</html>

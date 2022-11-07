@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>Homepage</title>
@@ -63,30 +64,33 @@
                         </div>
                     </div>
                     <div th:id="'itemBook' +${el.id}" class="card">
-<!--                        <div th:attr="onclick=|itemBookClick('${el.id}')|" class="card-img-top item-book">-->
-<!--&lt;!&ndash;                            <img width="auto" height="180" aria-label="Placeholder: Image cap"&ndash;&gt;-->
-<!--&lt;!&ndash;                                 class="mx-auto d-block p-2"&ndash;&gt;-->
-<!--&lt;!&ndash;                                 alt="..." th:src="@{/icons/book.png}"/>&ndash;&gt;-->
-<!--                        </div>-->
-<!--                        <hr/>-->
+                        <!--                        <div th:attr="onclick=|itemBookClick('${el.id}')|" class="card-img-top item-book">-->
+                        <!--&lt;!&ndash;                            <img width="auto" height="180" aria-label="Placeholder: Image cap"&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                 class="mx-auto d-block p-2"&ndash;&gt;-->
+                        <!--&lt;!&ndash;                                 alt="..." th:src="@{/icons/book.png}"/>&ndash;&gt;-->
+                        <!--                        </div>-->
+                        <!--                        <hr/>-->
                         <div class="card-body">
-                            <p th:attr="onclick=|itemBookClick('${el.id}')|" class="card-text m-0 item-book" style="direction: ltr; text-align: left;" th:text="*{name}"></p>
+                            <p th:attr="onclick=|itemBookClick('${el.id}')|" class="card-text m-0 item-book"
+                               style="direction: ltr; text-align: left;" th:text="*{name}"></p>
                             <hr/>
                             <div class="row">
                                 <div class="col">
                                     <span th:text="'Цена: ' + *{price}" class="w-auto"/>
                                 </div>
                                 <div class="col d-flex flex-row-reverse">
-                                    <span th:if="*{count > 0}" class="d-inline-block" tabindex="0" data-bs-toggle="tooltip"
-                                           title="Добавить в корзину">
-                                        <button  th:attr="onclick=|itemBookAddToBasket('${el.id}')|"
+                                    <span th:if="*{count > 0}" class="d-inline-block" tabindex="0"
+                                          data-bs-toggle="tooltip"
+                                          title="Добавить в корзину">
+                                        <button th:attr="onclick=|itemBookAddToBasket('${el.id}')|"
                                                 type="button"
                                                 class="btn btn-success btn-sm">В корзину
                                         </button>
                                     </span>
-                                    <span th:if="*{count <= 0}" class="d-inline-block" tabindex="0" data-bs-toggle="tooltip"
+                                    <span th:if="*{count <= 0}" class="d-inline-block" tabindex="0"
+                                          data-bs-toggle="tooltip"
                                           title="Нет товара">
-                                        <button  disabled type="button"
+                                        <button disabled type="button"
                                                 class="btn btn-success btn-sm">В корзину
                                     </button>
                                     </span>
@@ -100,17 +104,10 @@
     </div>
 </main>
 
-<a class="addBook" asp-action="Create" asp-controller="Group">
-    <img th:src="${}" src="~/img/plus.png" width="60" height="60" />
+<a sec:authorize="hasAuthority('ADMIN')" class="addBook" th:href="${'/add-book'}">
+    <img th:src="@{/img/plus.png}" width="60" height="60"/>
 </a>
-<div style="z-index: 100; position: fixed; right: 20px; bottom: 20px;">
-    <a th:href="${'/add-book'}" style="">
-        <i class='bx bx-user-plus'></i>
-        Добавить товар
-    </a>
-    <a th:href="${'/add-book'}" class="p-3 bg-light">+</a>
-<!--    <i class="bx bx-plus-circle fs-1"></i>-->
-</div>
+
 </body>
 <script src="/static/js/bootstrap.bundle.js" th:src="@{/js/bootstrap.bundle.js}"></script>
 <script src="/static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>

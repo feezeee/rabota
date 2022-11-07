@@ -32,10 +32,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/book").permitAll()
-                .antMatchers("/basket").permitAll()
-                .antMatchers("/add-book").permitAll()
-                .antMatchers("/nav-side").permitAll()
+                .antMatchers("/registration").permitAll()
+                .antMatchers("/categories").authenticated()
+                .antMatchers("/book").authenticated()
+                .antMatchers("/basket").authenticated()
+                .antMatchers("/add-book").hasAnyAuthority("ADMIN")
+                .antMatchers("/").permitAll()
                 .anyRequest().permitAll()
                 .and();
         http.formLogin()

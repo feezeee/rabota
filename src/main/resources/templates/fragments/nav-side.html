@@ -57,7 +57,7 @@
                     <div class="name" th:text="${dbUser.firstName} +' '+ ${dbUser.lastName}"></div>
                 </div>
             </div>
-            <form method="post" asp-controller="Account" asp-action="Logout">
+            <form action="/logout">
                 <button>
                     <i th:attr="onmouseenter=|onMouseEnterLogOut(this)|,onmouseleave=|onMouseLeaveLogOut(this)|" class='bx bx-log-out' id="log_out"></i>
                 </button>

@@ -11,6 +11,7 @@ import com.java.rabota.web.models.request.book_controller.PostBookRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
@@ -38,11 +39,6 @@ public class BookController {
         if (dbUser.isEmpty()) {
             return "error";
         }
-
-        //books = getMockBooks();
-        //books.addAll(getMockBooks());
-        //books.addAll(getMockBooks());
-
 
         model.addAttribute("books", books);
         model.addAttribute("dbUser", dbUser.get());

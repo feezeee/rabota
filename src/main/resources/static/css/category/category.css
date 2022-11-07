@@ -1,0 +1,7 @@
+.addCategory {
+    position: absolute;
+    bottom: 35px;
+    right: 35px;
+    position: fixed;
+    z-index: 100;
+}
