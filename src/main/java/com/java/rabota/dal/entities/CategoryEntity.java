@@ -20,5 +20,10 @@ public class CategoryEntity {
     @Column(name = "name")
     private String name;
     @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "book_has_category",
+            joinColumns = { @JoinColumn(name = "category_id") },
+            inverseJoinColumns = { @JoinColumn(name = "book_id") }
+    )
     private List<BookEntity> books = new ArrayList<>();
 }

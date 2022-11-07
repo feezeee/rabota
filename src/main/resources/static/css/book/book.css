@@ -5,3 +5,11 @@
 .item-book{
     cursor: pointer;
 }
+
+.addBook {
+    position: absolute;
+    bottom: 35px;
+    right: 35px;
+    position: fixed;
+    z-index: 1;
+}

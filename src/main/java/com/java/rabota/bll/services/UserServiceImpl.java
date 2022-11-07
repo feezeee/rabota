@@ -1,8 +1,6 @@
 package com.java.rabota.bll.services;
 
-import com.java.rabota.bll.models.order_service.GetOrder;
 import com.java.rabota.bll.models.user_service.GetUser;
-import com.java.rabota.bll.repositories.abstractions.OrderRepository;
 import com.java.rabota.bll.repositories.abstractions.UserRepository;
 import com.java.rabota.bll.services.abstractions.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

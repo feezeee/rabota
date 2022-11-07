@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css" th:href="@{/css/reset.css}">
+
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="/static/css/fragments/nav-side.css" th:href="@{/css/fragments/nav-side.css}">
+    <link th:href="${'https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'}" rel='stylesheet'>
+
+    <script src="/static/js/jquery.min.js" th:src="@{/js/jquery.min.js}"></script>
+    <script src="/static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="/static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script src="/static/js/jquery.js" th:src="@{/js/jquery.js}"></script>
+    <script src="/static/js/jquery-validation/dist/jquery.validate.min.js" th:src="@{/js/jquery-validation/dist/jquery.validate.min.js}"></script>
+    <script src="/static/js/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" th:src="@{/js/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js}"></script>
+    <script src="/static/js/fragments/nav-side.js" th:src="@{/js/fragments/nav-side.js}"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="my-nav-side" class="sidebar">
+    <div class="logo-details">
+        <a th:href="${'/book'}">
+            <i class='bx bxs-book icon'></i>
+            <p class="logo_name">Магазин книг</p>
+        </a>
+        <i th:attr="onclick=|btnNavMenuClick()|" class='bx bx-menu' id="btn_nav_menu"></i>
+    </div>
+    <ul class="nav-list">
+        <li th:attr="onmouseenter=|onMouseEnterLi('_books')|,onmouseleave=|onMouseLeaveLi('_books')|" id="area_books">
+            <a th:href="${'/book'}">
+                <i id="_books" class='bx bx-book'></i>
+                <span class="links_name">Книги</span>
+            </a>
+            <span class="tooltip">Книги</span>
+        </li>
+
+        <li th:attr="onmouseenter=|onMouseEnterLi('_categories')|,onmouseleave=|onMouseLeaveLi('_categories')|" id="area_categories">
+            <a th:href="${'/category'}">
+                <i id="_categories" class='bx bx-category'></i>
+                <span class="links_name">Категории</span>
+            </a>
+            <span class="tooltip">Категории</span>
+        </li>
+
+        <li th:attr="onmouseenter=|onMouseEnterLi('_basket')|,onmouseleave=|onMouseLeaveLi('_basket')|" id="area_basket">
+            <a th:href="${'/basket'}">
+                <i id="_basket" class='bx bx-cart'></i>
+                <span class="links_name">Корзина</span>
+            </a>
+            <span class="tooltip">Корзина</span>
+        </li>
+
+        <li class="profile">
+            <div class="profile-details">
+                <div class="name_job">
+                    <div class="name" th:text="${dbUser.firstName} +' '+ ${dbUser.lastName}"></div>
+                </div>
+            </div>
+            <form method="post" asp-controller="Account" asp-action="Logout">
+                <button>
+                    <i th:attr="onmouseenter=|onMouseEnterLogOut(this)|,onmouseleave=|onMouseLeaveLogOut(this)|" class='bx bx-log-out' id="log_out"></i>
+                </button>
+            </form>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
