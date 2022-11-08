@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CategoryModelForPostBookRequest {
+public class CategoryModelForPutBookRequest {
     @JsonProperty("id")
     private int id;
 }

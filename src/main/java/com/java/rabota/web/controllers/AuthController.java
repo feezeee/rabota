@@ -1,6 +1,6 @@
 package com.java.rabota.web.controllers;
 
-import com.java.rabota.bll.models.user_service.CreateUser;
+import com.java.rabota.bll.models.user_service.CreateUserInput;
 import com.java.rabota.bll.services.abstractions.UserService;
 import com.java.rabota.web.models.request.auth_controller.PostRegistrationModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class AuthController {
             {
                 return ResponseEntity.status(400).build();
             }
-            var createUser = new CreateUser();
+            var createUser = new CreateUserInput();
             createUser.setFirstName(registrationModel.getFirstName());
             createUser.setLastName(registrationModel.getLastName());
             createUser.setPhoneNumber(registrationModel.getPhoneNumber());

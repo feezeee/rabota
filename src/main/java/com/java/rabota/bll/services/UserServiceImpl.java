@@ -1,12 +1,11 @@
 package com.java.rabota.bll.services;
 
-import com.java.rabota.bll.models.user_service.CreateUser;
-import com.java.rabota.bll.models.user_service.GetUser;
+import com.java.rabota.bll.models.user_service.CreateUserInput;
+import com.java.rabota.bll.models.user_service.GetUserOutput;
 import com.java.rabota.bll.repositories.abstractions.UserRepository;
 import com.java.rabota.bll.repositories.abstractions.UserRoleRepository;
 import com.java.rabota.bll.services.abstractions.UserService;
 import com.java.rabota.dal.entities.UserEntity;
-import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -22,12 +21,12 @@ public class UserServiceImpl implements UserService {
     private UserRoleRepository userRoleRepository;
 
     @Override
-    public Optional<GetUser> getUserByLogin(String login){
+    public Optional<GetUserOutput> getUserByLogin(String login){
         var user = userRepository.findByLogin(login);
         if(user.isEmpty())
             return Optional.empty();
         var userEntity = user.get();
-        var mappedUser = new GetUser();
+        var mappedUser = new GetUserOutput();
         mappedUser.setId(userEntity.getId());
         mappedUser.setLogin(userEntity.getLogin());
         mappedUser.setPassword(userEntity.getPassword());
@@ -38,7 +37,7 @@ public class UserServiceImpl implements UserService {
     }
     
     @Override
-    public void registrateUser(CreateUser createUser) throws Exception {
+    public void registrateUser(CreateUserInput createUser) throws Exception {
 
         var user = new UserEntity();
         user.setFirstName(createUser.getFirstName());

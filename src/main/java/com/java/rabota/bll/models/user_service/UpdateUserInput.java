@@ -5,7 +5,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateUser {
+public class UpdateUserInput {
+    private int id;
     private String firstName;
     private String lastName;
     private String phoneNumber;

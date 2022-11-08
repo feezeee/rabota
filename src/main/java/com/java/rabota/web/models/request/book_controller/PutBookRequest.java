@@ -9,7 +9,9 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PostBookRequest {
+public class PutBookRequest {
+    @JsonProperty("id")
+    private int id;
     @JsonProperty("name")
     private String name;
     @JsonProperty("description")
@@ -19,5 +21,5 @@ public class PostBookRequest {
     @JsonProperty("count")
     private int count;
     @JsonProperty("categories")
-    private List<CategoryModelForPostBookRequest> categories = new ArrayList<>();
+    private List<CategoryModelForPutBookRequest> categories = new ArrayList<>();
 }

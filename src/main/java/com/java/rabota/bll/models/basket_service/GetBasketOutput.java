@@ -7,6 +7,6 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
-public class GetBasket {
-    private ArrayList<BookModelForGetBasket> books = new ArrayList<>();
+public class GetBasketOutput {
+    private ArrayList<BookModelForGetBasketOutput> books = new ArrayList<>();
 }

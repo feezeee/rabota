@@ -1,4 +1,4 @@
-package com.java.rabota.web.models.request.book_controller;
+package com.java.rabota.web.models.response.book_controller;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -9,7 +9,9 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PostBookRequest {
+public class GetBookResponse {
+    @JsonProperty("id")
+    private int id;
     @JsonProperty("name")
     private String name;
     @JsonProperty("description")
@@ -19,5 +21,5 @@ public class PostBookRequest {
     @JsonProperty("count")
     private int count;
     @JsonProperty("categories")
-    private List<CategoryModelForPostBookRequest> categories = new ArrayList<>();
+    private List<CategoryModelForGetBookResponse> categories = new ArrayList<>();
 }

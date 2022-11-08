@@ -1,8 +1,8 @@
 package com.java.rabota.bll.services;
 
 
-import com.java.rabota.bll.models.basket_service.BookModelForGetBasket;
-import com.java.rabota.bll.models.basket_service.GetBasket;
+import com.java.rabota.bll.models.basket_service.BookModelForGetBasketOutput;
+import com.java.rabota.bll.models.basket_service.GetBasketOutput;
 import com.java.rabota.bll.repositories.abstractions.BookRepository;
 import com.java.rabota.bll.repositories.abstractions.OrderRepository;
 import com.java.rabota.bll.repositories.abstractions.UserRepository;
@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.naming.AuthenticationException;
-import java.util.ArrayList;
-import java.util.Optional;
 
 @Service
 public class BasketServiceImpl implements BasketService {
@@ -27,13 +25,13 @@ public class BasketServiceImpl implements BasketService {
     private UserRepository userRepository;
 
     @Override
-    public GetBasket getBasket(int userId) {
+    public GetBasketOutput getBasket(int userId) {
         var orders = orderRepository.findByUserId(userId);
-        var basket = new GetBasket();
+        var basket = new GetBasketOutput();
         if (orders.isEmpty()) return basket;
         for (var it :
                 orders) {
-            var newBook = new BookModelForGetBasket();
+            var newBook = new BookModelForGetBasketOutput();
 
             var book = it.getBook();
 
@@ -97,6 +95,31 @@ public class BasketServiceImpl implements BasketService {
         }
 
 
+    }
+
+    @Override
+    public void deleteBookFromBasket(int userId, int bookId) throws AuthenticationException {
+
+        var user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new AuthenticationException();
+        }
+        var book = bookRepository.findById(bookId);
+        if (book.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        var orders = orderRepository.findByUserId(userId);
+
+        if (!orders.isEmpty()) {
+            for (var order :
+                    orders) {
+                // Если в коллекции есть такое
+                if (order.getBook().getId() == bookId) {
+                    orderRepository.delete(order);
+                    return;
+                }
+            }
+        }
     }
 }
 

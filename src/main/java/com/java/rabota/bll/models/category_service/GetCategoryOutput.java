@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GetCategory {
+public class GetCategoryOutput {
     private int id;
     private String name;
     private int bookCount;
