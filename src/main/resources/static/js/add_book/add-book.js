@@ -16,6 +16,16 @@ function addBook(){
 
     xhr.open("POST", '/add-book', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function () {
+            if (xhr.readyState == 4 && xhr.status == "201") {
+                    window.location.href = "/book";
+            }
+            else{
+                var toastMessage = document.getElementById('toastMessage');
+                toastMessage.textContent = "Произошла ошибка!"
+                $('#toastPlacement').toast('show')
+            }
+        };
 
 
     xhr.send(body);

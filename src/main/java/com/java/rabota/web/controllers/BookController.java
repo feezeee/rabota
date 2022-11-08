@@ -126,8 +126,11 @@ public class BookController {
     }
 
     @DeleteMapping("/delete-book")
-    public ResponseEntity deleteCategory(@RequestParam int id) {
+    public ResponseEntity deleteCategory(@RequestParam int id, @AuthenticationPrincipal User user) {
         try {
+            if (user == null) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            }
             bookService.deleteBookById(id);
             return ResponseEntity.status(200).build();
         } catch (Exception ex) {

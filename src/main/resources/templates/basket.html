@@ -13,18 +13,23 @@
 
 </head>
 <body>
+<div class="toast-container position-absolute bottom-0 end-0 p-3">
+    <div class="toast" data-bs-animation="true" data-bs-autohide="true" data-bs-delay="2000" id="toastPlacement">
+        <div class="toast-body" id="toastMessage">
+        </div>
+    </div>
+</div>
 
 <div th:replace="~{fragments/nav-side :: div}">
 
 </div>
 <main class="home-section">
-
     <div class="container-fluid bg-trasparent p-3" style="position: relative;">
         <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
             <div th:object="${book}" th:each="book : ${basket.books}" class="col">
                 <div class="card shadow-sm">
                     <div class="card-body" style="height: 200px;">
-                        <div class="clearfix mb-3">
+                        <div class="clearfix">
                             <div class="row">
                                 <h3 id="test" class="col dotdotdot-3" th:text="*{name}"></h3>
                             </div>
@@ -32,9 +37,11 @@
                                 <span class="">Цена: </span>
                                 <span class="" th:text="*{price}"></span>
                             </div>
-                            <div class="row">
-
-                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <button th:attr="onclick=|deleteBookFromBasket('*{id}')|" type="button" class="btn btn-danger btn-sm">Удалить</button>
                         </div>
                     </div>
                 </div>

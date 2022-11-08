@@ -33,3 +33,22 @@ function decFunc(bookId){
     quantity.value = number;
 
 }
+
+
+function deleteBookFromBasket(bookId){
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("DELETE", '/delete-book-from-basket' + '?book-id=' + bookId, true);
+    xhr.send(null);
+    xhr.onload = function () {
+        if (xhr.readyState == 4 && xhr.status == "200") {
+                window.location.reload();
+        }
+        else{
+            var toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = "Произошла ошибка!"
+            $('#toastPlacement').toast('show')
+        }
+    };
+
+}
