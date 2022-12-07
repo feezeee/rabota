@@ -5,6 +5,7 @@ import com.java.rabota.bll.models.book_service.CategoryModelForUpdateBookInput;
 import com.java.rabota.bll.models.book_service.CreateBookInput;
 import com.java.rabota.bll.models.book_service.UpdateBookInput;
 import com.java.rabota.bll.services.abstractions.BookService;
+import com.java.rabota.bll.services.abstractions.CategoryService;
 import com.java.rabota.bll.services.abstractions.UserService;
 import com.java.rabota.dal.entities.BookEntity;
 import com.java.rabota.dal.entities.CategoryEntity;
@@ -28,6 +29,9 @@ public class BookController {
     private BookService bookService;
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CategoryService categoryService;
 
     @RequestMapping("/book")
     public String getBooks(Model model, @AuthenticationPrincipal User user) {
@@ -53,6 +57,8 @@ public class BookController {
     @RequestMapping("/add-book")
     public String addBook(Model model, @AuthenticationPrincipal User user) {
         try{
+            var categories = categoryService.getCategories();
+            model.addAttribute("categories", categories);
             return "add-book";
         }catch (Exception ex){
             var messages = "Упс!";
@@ -98,6 +104,8 @@ public class BookController {
             }
             var book = result.get();
             model.addAttribute("book", book);
+            var categories = categoryService.getCategories().stream().filter(t-> !book.getCategories().stream().anyMatch(k->k.getName() == t.getName())).toList();
+            model.addAttribute("categories", categories);
             return "update-book";
         }catch (Exception ex){
             var messages = "Упс!";

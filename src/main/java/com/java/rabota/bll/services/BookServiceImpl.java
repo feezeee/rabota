@@ -68,6 +68,12 @@ public class BookServiceImpl implements BookService {
         newBook.setDescription(bookEntity.get().getDescription());
         newBook.setPrice(bookEntity.get().getPrice());
         newBook.setCount(bookEntity.get().getCount());
+        for (var category: bookEntity.get().getCategories()) {
+            var newCategory = new CategoryModelForGetBookOutput();
+            newCategory.setId(category.getId());
+            newCategory.setName(category.getName());
+            newBook.getCategories().add(newCategory);
+        }
         return Optional.of(newBook);
     }
     @Override
@@ -78,16 +84,19 @@ public class BookServiceImpl implements BookService {
         createBook.setPrice(createBookInput.getPrice());
         createBook.setCount(createBookInput.getCount());
 
+        var savedCategories = new ArrayList<CategoryEntity>();
         for (var categoryModel :
-                createBook.getCategories()
+                createBookInput.getCategories()
         ) {
             var existCategory = categoryRepository.findById(categoryModel.getId());
             if(!existCategory.isEmpty()){
                 createBook.getCategories().add(existCategory.get());
+//                existCategory.get().getBooks().add(createBook);
+//                savedCategories.add(existCategory.get());
             }
         }
-
         bookRepository.save(createBook);
+//        categoryRepository.saveAll(savedCategories);
     }
     @Override
     public void updateBook(UpdateBookInput updateBookInput) {
@@ -96,6 +105,8 @@ public class BookServiceImpl implements BookService {
         {
             throw new IllegalArgumentException();
         }
+        bookEntity.get().getCategories().clear();
+        bookRepository.save(bookEntity.get());
 
         bookEntity.get().setName(updateBookInput.getName());
         bookEntity.get().setDescription(updateBookInput.getDescription());

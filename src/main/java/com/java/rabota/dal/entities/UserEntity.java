@@ -33,6 +33,6 @@ public class UserEntity {
     @JoinColumn(name="user_role_id", nullable=false)
     private UserRoleEntity userRole;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     private List<OrderEntity> orders = new ArrayList<>();
 }

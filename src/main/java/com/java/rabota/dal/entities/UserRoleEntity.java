@@ -20,6 +20,6 @@ public class UserRoleEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userRole")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userRole", cascade = CascadeType.ALL)
     private List<UserEntity> users = new ArrayList<>();
 }

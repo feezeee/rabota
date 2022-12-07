@@ -38,32 +38,33 @@
     </div>
     <div class="row g-3 my-3">
         <div class="col form-floating">
-            <textarea required style="resize: none; height: 100px" class="form-control" id="bookDescription"
-                      name="bookDescription" placeholder="Описание книги"
-                      rows="5" th:value="${book.description}"></textarea>
+            <input required type="text" class="form-control" id="bookDescription" name="bookDescription" placeholder="Описание книги" th:value="${book.description}">
             <label for="bookDescription">Описание книги</label>
         </div>
     </div>
     <div class="row g-3 my-3">
-        <!-- Note the missing multiple attribute! -->
-        <select id="example-multiple-selected">
-            <option value="1">Option 1</option>
-            <option value="2" selected="selected">Option 2</option>
-            <!-- Option 3 will be selected in advance ... -->
-            <option value="3" selected="selected">Option 3</option>
-            <option value="4">Option 4</option>
-            <option value="5">Option 5</option>
-            <option value="6">Option 6</option>
-        </select>
-        <div class="col form-floating">
-            <!--            <input required type="text" class="form-control" id="bookName" placeholder="Категории">-->
-            <select class="form-control" id="bookCategories" name="bookCategories" multiple="multiple">
-                <option value="1">Cheese</option>
-                <option value="2">Боевик</option>
-                <option value="3">БоевикБоевик</option>
-            </select>
-
-            <label for="bookCategories">Категории</label>
+        <div class="accordion" name="bookCategories">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        Категории
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                     data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div th:each="category : ${categories}" th:object="${category}" class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" th:id="'categoryId'+*{id}">
+                            <label class="form-check-label" th:for="'categoryId'+*{id}" th:text="*{name}"></label>
+                        </div>
+                        <div th:each="category : ${book.categories}" th:object="${category}" class="form-check">
+                            <input class="form-check-input" checked type="checkbox" value="" th:id="'categoryId'+*{id}">
+                            <label class="form-check-label" th:for="'categoryId'+*{id}" th:text="*{name}"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row g-3 my-3">
