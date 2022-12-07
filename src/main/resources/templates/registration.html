@@ -9,6 +9,14 @@
 </head>
 
 <body class="d-flex justify-content-center align-items-center h-100">
+
+<div class="toast-container position-absolute bottom-0 end-0 p-3">
+    <div class="toast" data-bs-animation="true" data-bs-autohide="true" data-bs-delay="2000" id="toastPlacement">
+        <div class="toast-body" id="toastMessage">
+        </div>
+    </div>
+</div>
+
 <main class="container shadow-lg p-3 m-5 bg-body rounded">
     <div class="modal-header">
         <span></span>
@@ -63,6 +71,7 @@
 
 <script src="/static/js/bootstrap.bundle.js" th:src="@{/js/bootstrap.bundle.js}"></script>
 <script src="/static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<script src="/static/js/jquery-3.2.1.slim.min.js" th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
 
 <script src="/static/js/registration/registration.js" th:src="@{/js/registration/registration.js}"></script>
 </html>
