@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css" th:href="@{/css/bootstrap.css}">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css" th:href="@{/css/reset.css}">
+
+    <link th:href="${'https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'}" rel='stylesheet'>
+    <!--    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-multiselect.css" th:href="@{/css/bootstrap-multiselect.css}">-->
+</head>
+
+<body class="d-flex justify-content-center align-items-center h-100" style="background: #1f454e;">
+<div class="toast-container position-absolute bottom-0 end-0 p-3">
+    <div class="toast" data-bs-animation="true" data-bs-autohide="true" data-bs-delay="2000" id="toastPlacement">
+        <div class="toast-body" id="toastMessage">
+        </div>
+    </div>
+</div>
+
+<main class="container shadow-lg p-3 m-5 bg-body rounded">
+    <div class="modal-header">
+        <span></span>
+        <a href="/category" type="button" class="btn-close" aria-label="Close"></a>
+    </div>
+    <div class="row g-3 mb-1">
+        <div class="col">
+            <h4 class="text-info">Редактрирование категории</h4>
+        </div>
+    </div>
+    <div class="row g-3 my-3">
+        <div class="col form-floating">
+            <input required hidden type="text" class="form-control" id="categoryId" name="categoryId" placeholder="Id категории" th:value="${category.id}">
+            <input required type="text" class="form-control" id="categoryName" name="categoryName" placeholder="Название категории" th:value="${category.name}">
+            <label for="categoryName">Название категории</label>
+        </div>
+    </div>
+    <div class="row g-3 my-3">
+        <div class="col form-floating d-flex flex-row-reverse">
+            <button type="button" th:attr="onclick=|updateCategory()|"class="btn btn-outline-success">Изменить</button>
+        </div>
+    </div>
+</main>
+</body>
+
+
+
+<script src="/static/js/bootstrap.bundle.js" th:src="@{/js/bootstrap.bundle.js}"></script>
+<script src="/static/js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+<script src="/static/js/jquery-3.2.1.slim.min.js" th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
+<!--<script src="/static/js/bootstrap-multiselect.js" th:src="@{/js/bootstrap-multiselect.js}"></script>-->
+
+
+<script src="/static/js/update_category/update-category.js" th:src="@{/js/update_category/update-category.js}"></script>
+</html>

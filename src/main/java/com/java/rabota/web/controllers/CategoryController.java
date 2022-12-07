@@ -70,7 +70,7 @@ public class CategoryController {
     }
 
     @PostMapping("/add-category")
-    public ResponseEntity addCategory(PostCategoryRequest postCategoryRequest) {
+    public ResponseEntity addCategory(@RequestBody PostCategoryRequest postCategoryRequest) {
         try {
             var createCategory = new CreateCategoryInput();
             createCategory.setName(postCategoryRequest.getName());
@@ -83,9 +83,17 @@ public class CategoryController {
     }
 
     @RequestMapping("/update-category")
-    public String updateCategoryPage(Model model, @AuthenticationPrincipal User user) {
+    public String updateCategoryPage(@RequestParam int categoryId, Model model, @AuthenticationPrincipal User user) {
         try {
-            return "add-category";
+            var result = categoryService.getCategoryById(categoryId);
+            if(result.isEmpty()){
+                var messages = "Такой категории не существует!";
+                model.addAttribute("messages", messages);
+                return "error";
+            }
+            var category = result.get();
+            model.addAttribute("category", category);
+            return "update-category";
         } catch (Exception ex) {
             var message = "Упс!";
             model.addAttribute("message", message);
@@ -94,7 +102,7 @@ public class CategoryController {
     }
 
     @PutMapping("/update-category")
-    public ResponseEntity updateCategory(PutCategoryRequest putCategoryRequest) {
+    public ResponseEntity updateCategory(@RequestBody PutCategoryRequest putCategoryRequest) {
         try {
             var existCategory = categoryService.getCategoryById(putCategoryRequest.getId());
             if (existCategory.isEmpty()) {

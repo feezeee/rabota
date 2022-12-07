@@ -88,8 +88,16 @@ public class BookController {
     }
 
     @RequestMapping("/update-book")
-    public String updateBook(Model model, @AuthenticationPrincipal User user) {
+    public String updateBook(@RequestParam int bookId, Model model, @AuthenticationPrincipal User user) {
         try{
+            var result = bookService.getBookById(bookId);
+            if(result.isEmpty()){
+                var messages = "Такой книги не существует!";
+                model.addAttribute("messages", messages);
+                return "error";
+            }
+            var book = result.get();
+            model.addAttribute("book", book);
             return "update-book";
         }catch (Exception ex){
             var messages = "Упс!";
